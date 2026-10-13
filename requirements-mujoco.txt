@@ -1,0 +1,17 @@
+# Install matching torch/torchvision first (see README_MUJOCO_ZH.md).
+transformers==4.57.0
+accelerate==1.5.2
+qwen-vl-utils==0.0.14
+omegaconf==2.3.0
+numpy==1.26.4
+# Closed-loop evaluate/codec_check; must match collected data contract.
+mujoco==2.3.7
+av==12.3.0
+pyarrow==14.0.1
+h5py==3.12.1
+scipy==1.14.1
+pillow>=10,<12
+rich>=13,<15
+wandb>=0.19,<0.20
+safetensors>=0.4.5
+pytest>=8,<9

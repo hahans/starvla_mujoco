@@ -1,0 +1,63 @@
+# Native StarVLA trainer: starVLA/training/train_starvla.py
+run_root_dir: outputs
+run_id: mujoco_qwenfast_native
+seed: 42
+wandb_project: starvla_mujoco
+wandb_entity: null
+is_debug: false
+version_id: "0.21"
+
+framework:
+  name: QwenFast
+  use_state_prompt: true
+  qwenvl:
+    base_vlm: playground/Pretrained_models/Qwen2.5-VL-3B-Instruct-Action
+    attn_implementation: sdpa
+    torch_dtype: float32
+    gradient_checkpointing: true
+    min_pixels: 50176
+    max_pixels: 50176
+  action_model:
+    action_model_type: FAST
+    action_dim: 7
+    action_horizon: 8
+    fast_tokenizer: playground/Pretrained_models/fast
+    # Same pretrained BPE vocabulary; higher precision DCT coefficient coding.
+    # Run codec_check before training. These settings are part of the policy.
+    fast_scale: 1000
+    fast_min_token: -4096
+    max_new_tokens: 256
+datasets:
+  vla_data:
+    dataset_py: mujoco_lerobot
+    data_root_dir: data/block_lerobot
+    data_mix: mujoco_block_train
+    action_type: absolute
+    include_state: true
+    per_device_batch_size: 1
+    num_workers: 4
+    max_train_episodes: null
+
+trainer:
+  max_train_steps: 20000
+  num_warmup_steps: 1000
+  save_interval: 1000
+  # Official eval samples the training loader, not a held-out validation set.
+  # Disable it for FAST until generations are valid; use offline_eval for val.
+  eval_interval: 0
+  logging_frequency: 20
+  learning_rate:
+    base: 2.0e-5
+  lr_scheduler_type: cosine
+  scheduler_specific_kwargs: {}
+  freeze_modules: qwen_vl_interface.model.model.visual
+  gradient_clipping: 1.0
+  gradient_accumulation_steps: 16
+  is_resume: false
+  pretrained_checkpoint: null
+  save_format: pt
+  optimizer:
+    name: AdamW
+    betas: [0.9, 0.95]
+    eps: 1.0e-8
+    weight_decay: 0.01

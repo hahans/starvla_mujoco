@@ -1,0 +1,91 @@
+{
+  "upstream_commit": "2f17402a5ccaa09907516ae5e542b0fa6ee5d155",
+  "date": "2026-09-15",
+  "vla_training_performed": false,
+  "pretrained_3b_weights_downloaded": false,
+  "tests": "19 passed (native StarVLA wiring, accumulation hooks, checkpoints, CLI, LeRobot, tiny Qwen forward/native reload, and RGB preview)",
+  "runtime": "isolated .venv-check, Python 3.10, transformers 4.57.0, CPU; original hdp unchanged",
+  "real_forward_check": "tiny random Qwen with actual pinned processor; no backward/optimizer; optional broken local DeepSpeed disabled in test only",
+  "smoke_conversion": {
+    "manifest_sha256": "39d63d00f00bbb4f35a4de5f093d829a6686bfc5fd3cc418fd4326ad42e60537",
+    "splits": {
+      "train": {
+        "episodes": 2,
+        "frames": 636
+      },
+      "val": {
+        "episodes": 1,
+        "frames": 318
+      },
+      "test": {
+        "episodes": 1,
+        "frames": 318
+      }
+    },
+    "format": "LeRobot v2.1",
+    "rgb_video": "lossless libx264rgb",
+    "smoke_limit": null
+  },
+  "codec": {
+    "codec_scale10": {
+      "max_abs_error_rad_m": [
+        0.021094322204589844,
+        0.033871740102767944,
+        0.02311563491821289,
+        0.02768683433532715,
+        0.0078029632568359375,
+        0.04635763168334961,
+        0.0010619107633829117
+      ],
+      "max_action_tokens": 13,
+      "episodes": 2,
+      "successes": {
+        "raw_replay": 2,
+        "codec_replay_execute1": 0,
+        "codec_replay_execute_horizon": 2
+      }
+    },
+    "codec_scale1000": {
+      "max_abs_error_rad_m": [
+        0.0002970695495605469,
+        0.0006902217864990234,
+        0.00047397613525390625,
+        0.00040984153747558594,
+        0.00012421607971191406,
+        0.0006501674652099609,
+        1.33514404296875e-05
+      ],
+      "max_action_tokens": 168,
+      "episodes": 2,
+      "successes": {
+        "raw_replay": 2,
+        "codec_replay_execute1": 2,
+        "codec_replay_execute_horizon": 2
+      }
+    }
+  },
+  "cursor_preview_check": {
+    "source_dataset": "data/block_lerobot",
+    "episodes": {
+      "train": 0,
+      "val": 0,
+      "test": 0
+    },
+    "frames_compared": 954,
+    "max_rgb_error_hdf5_vs_pyav": 0,
+    "source_format": "h264 High 4:4:4 Predictive / gbrp",
+    "preview_format": "h264 high / yuv420p / BT.601",
+    "training_data_modified": false,
+    "preview_test": "passed: RGB channels, video metadata, source unchanged"
+  },
+  "native_trainer": {
+    "entrypoint": "starVLA/training/train_starvla.py",
+    "class": "VLATrainer",
+    "backend": "Accelerate DDP",
+    "retired_custom_training_loop": true,
+    "dataset_py": "mujoco_lerobot",
+    "checkpoint_format": "checkpoints/steps_N_pytorch_model.pt; raw framework state dict",
+    "full_optimizer_resume": false,
+    "formal_gpu_training_tested": false
+  }
+}

@@ -1,0 +1,14 @@
+# Robot PC for `real_robot run --server ... --robot ur5`; no torch or model code needed.
+numpy
+pillow>=10,<12
+websockets>=13
+msgpack
+typing_extensions
+ur-rtde
+scipy
+opencv-python
+# Only for camera="realsense"; skip if librealsense was built with its own Python bindings.
+pyrealsense2
+# gripper="dm" (DM4310 over ../ur5_control) and the keyboard recorder ur5_record.py.
+pyserial
+pynput

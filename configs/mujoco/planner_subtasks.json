@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "subtasks": [
+    {
+      "id": "approach",
+      "subgoal": "move the black gripper to the green block",
+      "description": "Approach and descend with the black gripper open, until ready to grasp the green block. Keep the white arm still.",
+      "phases": ["prepare", "approach", "descend"]
+    },
+    {
+      "id": "grasp_lift",
+      "subgoal": "grasp and lift the green block with the black gripper",
+      "description": "Close the black gripper on the green block and lift it clear of the table before horizontal transport.",
+      "phases": ["grasp", "lift"]
+    },
+    {
+      "id": "transfer",
+      "subgoal": "move the held green block to the right of the red block",
+      "description": "Carry the held green block above the destination on the right of the red block. Do not move the red block.",
+      "phases": ["transfer"]
+    },
+    {
+      "id": "place_release",
+      "subgoal": "place the green block to the right of the red block, release it and withdraw the black gripper",
+      "description": "Lower the green block onto the table, open the black gripper, withdraw, and hold until stable. Do not infer completion from the dataset's success flag.",
+      "phases": ["place", "release", "retreat", "settle"]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+# A100 80GB candidate: full FP32 master weights + bf16 autocast, frozen bf16 reference.
+# Batch 8 environments for generation; accumulate update gradients one action chunk at a time.
+# Paths are relative to starvla_mujoco (train_grpo.sh sets that working directory).
+rlinf_root: ../Rlinf4/Rlinf4
+checkpoint: mujoco_qwenfast_native/checkpoints/steps_9000_pytorch_model.pt
+base_vlm: /home/czj/agent-vla-gpt/Qwen2.5-VL-3B-Instruct-Action
+fast_tokenizer: playground/Pretrained_models/fast
+output: outputs/mujoco_qwenfast_grpo_a100_full
+device: cuda
+torch_dtype: float32
+train_mode: full
+num_envs: 8
+seed: 4000000
+iterations: 100
+groups_per_iteration: 2
+group_size: 4
+max_steps: 500
+execute: 8
+max_new_tokens: 256
+temperature: 0.7
+reward_mode: staged
+learning_rate: 0.000001
+update_epochs: 1
+clip_ratio: 0.2
+kl_beta: 0.02
+max_grad_norm: 1.0
+lora_rank: 8
+lora_alpha: 16
+save_interval: 5

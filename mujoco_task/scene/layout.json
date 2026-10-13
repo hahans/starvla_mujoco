@@ -1,0 +1,94 @@
+{
+  "source": "real_raw2 calibration: geometry measured relative to the left UR5 base in the go_home world frame",
+  "table_center": [
+    -0.07,
+    0.0275,
+    0.9305
+  ],
+  "table_half_size": [
+    0.6,
+    0.2925,
+    0.03
+  ],
+  "near_table_center": [
+    -0.07,
+    -0.675,
+    0.935
+  ],
+  "near_table_half_size": [
+    0.6,
+    0.4,
+    0.03
+  ],
+  "pedestal_center": [
+    -0.05,
+    0.65,
+    0.486
+  ],
+  "pedestal_half_size": [
+    0.47,
+    0.31,
+    0.446
+  ],
+  "mount_center": [
+    -0.05,
+    0.57,
+    1.068
+  ],
+  "mount_half_size": [
+    0.08,
+    0.1,
+    0.1
+  ],
+  "left_base": [
+    -0.22,
+    0.56,
+    1.19
+  ],
+  "right_base": [
+    0.12,
+    0.56,
+    1.19
+  ],
+  "left_mount_tilt_deg": 45,
+  "left_mount_azimuth_deg": 180,
+  "right_mount_tilt_deg": 45,
+  "right_mount_azimuth_deg": 0,
+  "left_flange_home_rel_base": [
+    -0.1,
+    -0.35,
+    0.15
+  ],
+  "policy_camera_pos_rel_left_base": [
+    -0.08949,
+    -1.41463,
+    -0.005
+  ],
+  "camera_position": [
+    0.15,
+    -1.75,
+    1.8
+  ],
+  "camera_target": [
+    0,
+    0.4,
+    1.04
+  ],
+  "camera_fovy": 39,
+  "block_task": {
+    "cube_half_size": 0.025,
+    "cube_mass": 0.06,
+    "green_xy": [
+      -0.43,
+      0.065
+    ],
+    "red_xy": [
+      -0.308,
+      0.065
+    ],
+    "goal_offset_x": 0.095,
+    "lift_height": 0.08,
+    "placement_tolerance": 0.035,
+    "settle_seconds": 0.5
+  }
+}

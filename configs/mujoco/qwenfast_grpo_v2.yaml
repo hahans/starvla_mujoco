@@ -1,0 +1,50 @@
+# Paths are relative to starvla_mujoco (train_grpo.sh sets that working directory).
+rlinf_root: ../Rlinf4/Rlinf4
+checkpoint: mujoco_qwenfast_native/checkpoints/steps_9000_pytorch_model.pt
+base_vlm: /home/czj/agent-vla-gpt/Qwen2.5-VL-3B-Instruct-Action
+fast_tokenizer: playground/Pretrained_models/fast
+output: outputs/mujoco_qwenfast_grpo_v2
+device: cuda
+torch_dtype: bfloat16
+train_mode: lora
+num_envs: 16
+seed: 0
+# Uniform scene seed sampling per GRPO group, with replacement; bounds are inclusive.
+# `seed` remains the RNG seed. Set both bounds to null for legacy sequential resets.
+train_seed_min: 0
+train_seed_max: 20
+iterations: 100
+groups_per_iteration: 8
+group_size: 8
+# Each pass draws new group seeds, then one update.
+# A group still shares one seed. Buffer = groups_per_iteration * group_size * rollout_epoch = 128.
+rollout_epoch: 1
+max_steps: 500
+execute: 8
+max_new_tokens: 256
+temperature: 0.7
+repetition_penalty: 1.05
+reward_mode: sparse
+learning_rate: 0.00002
+update_epochs: 1
+# Buffer is 128 trajectories. Shuffle, then 4 Adam steps of 32.
+minibatch_size: 32
+clip_ratio: 0.2
+kl_beta: 0.0
+max_grad_norm: 1.0
+# RLinf importance_sampling_fix: PPO denominator stays the rollout log-prob.
+# Advantages are scaled by clamp(exp(recompute - rollout), min=clip). No abort.
+importance_sampling_fix: true
+importance_sampling_clip: 1.0
+lora_rank: 16
+lora_alpha: 16
+save_interval: 5
+
+# New experiment from SFT; do not resume old unconstrained rollouts into this policy.
+strict_fast: true
+validation_interval: 5
+validation_split: train
+validation_episodes: 10
+validation_data_root: data/block_lerobot
+# 0 runs every iteration. RLinf does not stop the run when validation stalls.
+early_stop_patience: 0
